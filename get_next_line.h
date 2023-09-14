@@ -12,4 +12,12 @@
 #define BUFFER_SIZE 42
 #endif
 
+char *get_next_line(int fd);
+char *ft_read_and_join(int fd, char *temp);
+char *new_temp(char *temp);
+char *get_line(char *temp);
+char *join(char *temp, char *buffer);
+char *ft_get_char(char *str, char fetch);
+int ft_strlen(char *str);
+
 #endif
