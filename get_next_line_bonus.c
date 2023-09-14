@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsousa-d <bsousa-d@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 11:00:52 by bsousa-d          #+#    #+#             */
-/*   Updated: 2023/09/14 11:00:54 by bsousa-d         ###   ########.fr       */
+/*   Created: 2023/09/14 11:00:56 by bsousa-d          #+#    #+#             */
+/*   Updated: 2023/09/14 11:00:57 by bsousa-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ char *ft_read_and_join(int fd, char *temp)
 char *get_next_line(int fd)
 {
     char *line;
-    static char *temp;
+    static char *temp[FOPEN_MAX];
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
         return (NULL);
-    temp = ft_read_and_join(fd, temp);
-    if (!temp)
+    temp[fd] = ft_read_and_join(fd, temp[fd]);
+    if (!temp[fd])
         return (NULL);
-    line = ft_get_line(temp);
-    temp = new_temp(temp);
+    line = ft_get_line(temp[fd]);
+    temp[fd] = new_temp(temp[fd]);
     return (line);
 }
 
